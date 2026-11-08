@@ -151,6 +151,7 @@ function updatetime() {
     document.getElementById("perioddisplay").textContent = periodtext;
 
     updatehalloween();
+    checklifeevent();
 }
 
 function checkneeds() {
@@ -494,4 +495,190 @@ function playactionanimation(action, duration) {
         charactervisual.querySelectorAll(".sleepsymbol").forEach(s => s.remove());
         actiontext.textContent = "";
     }, duration);
+}
+
+let lastlifeevent = "";
+let activelifeevent = null;
+
+const lifeevent = [
+    {
+        title: "a neighbour needs help!",
+        description: "your neighbour asks you to help carry some boxes.",
+        choices : [
+            {
+                label: "help them",
+                result: "your neighbour thanks you and pays you $25.",
+                effects: {
+                    money: 25,
+                    energy: -10,
+                    happiness: 8
+                }
+            },
+            {
+                label: "decline",
+                result: "you decide to continue with your day.",
+                effects: {}
+            }
+        ]
+    },
+    {
+        title: "you found a wallet",
+        description: "you find a wallet on the pavement. it contains $67.  SIX SEVEN",
+        choices: [
+            {
+                label: "return it",
+                result: "the owner thanks you! you feel good about helping.",
+                effects: {
+                    happiness: 15
+                }
+            },
+            {
+                label: "keep $67 |SIX SEVENN",
+                result: "you take $67 from the stolen wallet",
+                effects: {
+                    money: 67,
+                    happiness: -8
+                }
+            }
+        ]
+    },
+    {
+        title:  "a food vendor",
+        description: "a food vendor offers you a cheap meal",
+        choices: [
+            {
+                label: "buy for $5",
+                result: "you enjoy a warm meal",
+                effects: {
+                    money: -5,
+                    hunger: 20,
+                    happiness: 5
+                }
+            },
+            {
+                label: "save money and walk away",
+                result: "you decide to save your money",
+                effects: {}
+            }
+        ]
+    },
+    {
+        title: "a stray cat",
+        description: "a friendly stray cat approaches you.",
+        choices:[
+            {
+                label: "pet the cat",
+                result: "the cat stays with you for a while. you feel happy!",
+                effects: {
+                    happiness: 15
+                }
+            },
+            {
+                label: "ignore it",
+                result: "you continue walking",
+                effects: {}
+            }
+        ]
+    },
+    {
+        title: "unexpected rain",
+        description: "heavy rain suddenly starts falling.",
+        choices: [
+            {
+                label: "find shelter",
+                result: "you wait under a shelter and recover some energy!",
+                effects: {
+                    energy: 10
+                }
+            },
+            {
+                label: "keep walking",
+                result: "you sad because got soaked in the rain :(",
+                effects: {
+                    happiness: -8,
+                    energy: -5
+                }
+            }
+        ]
+    }
+]
+
+function checklifeevent() {
+    const currenttime = character.day + "-" + character.hour;
+
+    if (currenttime === lastlifeevent) {
+        return;
+    }
+
+    lastlifeevent = currenttime;
+
+    if (activelifeevent !== null) {
+        return;
+    }
+
+    if (Math.random() > 0.25) {
+        return;
+    }
+
+    const randomindex = Math.floor(
+        Math.random() * lifeevent.length
+    );
+
+    activelifeevent = lifeevent[randomindex];
+
+    const panel = document.getElementById("lifeevent");
+    document.getElementById("eventdescription").textContent = activelifeevent.description;
+    const choices = document.getElementById("eventchoices");
+
+    choices.innerHTML = "";
+
+    activelifeevent.choices.forEach((choice, index) => {
+        const button = document.createElement("button");
+
+        button.textContent = choice.label;
+
+        button.onclick = function() {
+            resolvelifeevent(index);
+        };
+        choices.appendChild(button);
+    });
+    panel.style.display = "block";
+}
+
+function resolvelifeevent(index) {
+    if (activelifeevent === null) {
+        return;
+    }
+
+    const choice = activelifeevent.choices[index];
+
+    if (!choice) {
+        return;
+    }
+    const effect = choice.effects;
+
+    for (const stat in effect) {
+        character[stat] += effect[stat];
+    }
+
+    character.money = Math.max(0, character.money);
+
+    character.hunger = Math.max(
+        0, Math.min(100,character.hunger)
+    );
+
+    character.happiness = Math.max(
+        0, Math.min(100,character.happiness)
+    );
+
+    character.energy = Math.max(
+        0, Math.min(100,character.energy)
+    );
+
+    document.getElementById("eventdescription").textContent = choice.result;
+    document.getElementById("eventchoices").innerHTML = "<p>event completed.</p>";
+    activelifeevent = null;
+
+    updategame();
+    checkneeds();
 }
