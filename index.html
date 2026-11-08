@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Life simulator</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <main id="charactercreation">
+            <h1>a life simulator</h1>
+            <p>create your character</p>
+
+            <div class="creationbox">
+                <label for="nameinput">name</label>
+                <input id="nameinput" type="text" placeholder="enter your name">
+                <label for="genderinput">gender</label>
+                <select id="genderinput">
+                    <option value="male">MALE</option>
+                    <option value="female">FEMALE</option>
+                </select>
+
+                <label for="ageinput">age</label>
+                <input id="ageinput" type="number" min="13" max="80" value="18">
+
+                <button onclick="createcharacter()">START</button>
+            </div>
+        </main>
+
+        <main id="game" style="display: none;">
+            <header>
+                <h1 id="playername">player</h1>
+                <p id="playerinfo">age 18  |  male</p>
+            </header>
+
+            <section class="timecard">
+                <h2 id="daydisplay">day 1</h2>
+                <h3 id="timedisplay">08:00 AM</h3>
+                <p id="perioddisplay">morning</p>
+            </section>
+
+            <section class="stats">
+                <div class="stat">
+                    <span>energy</span>
+                    <strong><span id="energy">100</span>%</strong>
+                </div>
+
+                <div class="stat">
+                    <span>happiness</span>
+                    <strong><span id="happiness">100</span>%</strong>
+                </div>
+                <div class="stat">
+                    <span>hunger</span>
+                    <strong><span id="hunger">100</span>%</strong>
+                </div>
+                <div class="stat">
+                    <span>money</span>
+                    <strong>$<span id="money">100</span></strong>
+                </div>
+            </section>
+
+            <section class="charactercard">
+                <div class="charactervisual">
+                    <div class="characterhair"></div>
+                    <div class="characterhead">
+                        <div class="charactereye left"></div>
+                        <div class="charactereye right"></div>
+                    </div>
+                    <div class="characterbody">
+                        <div class="characterarm left"></div>
+                        <div class="characterarm right"></div>
+                        <div class="characterleg left"></div>
+                        <div class="characterleg right"></div>
+                    </div>
+                </div>
+
+                <div id="actioneffect"></div>
+                <p id="actiontext"></p>
+
+                <div class="eatingscene">
+                    <div id="eatingfood"></div>
+                </div>
+                <p id="eatingtext"></p>
+
+                <h2 id="cardname">player</h2>
+                <p id="status">your life is about to begin.</p>
+            </section>
+
+            <section class="actions">
+                <button onclick="eat()">eat</button>
+                <button onclick="sleep()">sleep</button>
+                <button onclick="work()">work</button>
+                <button onclick="relax()">chillin</button>
+            </section>
+
+            <section id="halloweenarea" class="halloweenarea">
+                <h2>halloween night</h2>
+                <p>choose a house to visit</p>
+
+                <div class="halloweenscene">
+                    <div class="moon"></div>
+                    <div class="ghost ghostone"></div>
+                    <div class="ghost ghosttwo"></div>
+                </div>
+
+                <div class="houses">
+                    <button onclick="visithouse(1)" id="house1">KNOCK HOUSE 1</button>
+                    <button onclick="visithouse(2)" id="house2">KNOCK HOUSE 2</button>
+                    <button onclick="visithouse(3)" id="house3">KNOCK HOUSE 3</button>
+                </div>
+
+                <p id="halloweenmessage">the houses are waiting for a knock....</p>
+            </section>
+
+            <section class="inventory">
+                <h2>backpack</h2>
+                <div id="inventorylist">
+                    <p>your backpack is empty.</p>
+                </div>
+            </section>
+        </main>
+        <script src="main.js"></script>
+    </body>
+</html>

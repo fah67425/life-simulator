@@ -1,0 +1,490 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: white;
+}
+
+main {
+    width: min(90%, 600px);
+    margin: 60px auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    color: #aaa;
+}
+
+.creationbox {
+    background:#1f1f1f;
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 30px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    background: greenyellow;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.creationbox button {
+    width: 100%;
+    margin-top: 25px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.stat span {
+    color: #aaa;
+} 
+
+stat strong {
+    display: block;
+    margin-top: 8px;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.charactercard {
+    background: gray;
+    margin-top: 15px;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.charactercard p {
+    color: black;
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.actions button {
+    background: #333;
+}
+
+.timecard {
+    background: gray;
+    padding:20px;
+    margin-top: 25px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.timecard h2 {
+    margin: 0;
+} .timecard h3 {
+    font-size: 30px;
+    margin: 10px 0;
+} .timecard p {
+    margin: 0;
+}
+
+.inventory {
+    background: gray;
+    margin-top: 15px;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.inventory h2 {
+    margin-top: 0;
+}
+
+.inventoryitem {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    background: #333;
+    padding: 10px;
+    margin-top:8px;
+    border-radius:8px;
+}
+
+.inventoryitem button {
+    padding: 6px 12px;
+    font-size: 14px;
+    background: greenyellow;
+    flex-shrink: 0;
+}
+
+.inventoryitem strong {
+    display: block;
+    font-size: 17px;
+}
+
+.inventoryitem small {
+    display: block;
+    color: greenyellow;
+    margin-top: 4px;
+}
+
+.charactervisual {
+    position: relative;
+    width: 140px;
+    height: 210px;
+    margin: 20px auto;
+}
+
+.characterhead {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background: greenyellow;
+    border-radius: 50%;
+    top: 10px;
+    left: 35px;
+    z-index: 2;
+}
+
+.characterhair {
+    position: absolute;
+    width: 76px;
+    height: 35px;
+    background: #2b2118;
+    border-radius: 45px 45px 15px 15px;
+    top: 5px;
+    left: 32px;
+    z-index: 3;
+}
+
+.charactereye {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    background: #222;
+    border-radius: 50%;
+    top: 32px;
+}
+
+.charactereye.left {
+    left: 20px;
+}
+.charactereye.right {
+    right: 20px;
+}
+
+.characterbody {
+    position: absolute;
+    width: 80px;
+    height: 85px;
+    background: lightskyblue;
+    border-radius: 20px 20px 10px 10px;
+    top: 75px;
+    left:30px;
+}
+
+.characterarm {
+    position: absolute;
+    width: 20px;
+    height: 70px;
+    background: peachpuff;
+    border-radius: 20px;
+    top: 10px;
+}
+
+.characterarm.left {
+    left: -10px;
+    transform: rotate(15deg);
+}
+
+.characterarm.right {
+    right: -10px;
+    transform: rotate(-15deg);
+}
+
+.characterleg {
+    position: absolute;
+    width: 25px;
+    height: 65px;
+    background: #292929;
+    border-radius: 10px;
+    top: 90px;
+}
+
+.characterleg.left {
+    left: 45px;
+}
+
+.characterleg.right {
+    right: 45px;
+}
+
+.charactereating {
+    animation: charactereat 0.25s infinite alternate;
+}
+
+@keyframes charactereat {
+    from {
+        transform: translateX(-3px) rotate(-2deg);
+    } to {
+        transform: translateX(3px) rotate(2deg);
+    }
+}
+
+.eatingscene {
+    position: relative;
+    width: 160px;
+    height: 70px;
+    margin: 0 auto;
+}
+
+#eatingfood {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    background: #e6b84c;
+    border-radius: 50%;
+    left: 5px;
+    top: -235px;
+    opacity: 0;
+}
+
+#eatingfood.eatanimation {
+    animation: foodfly 0.8s ease-in forwards;
+}
+
+@keyframes foodfly {
+    0% {
+        left: 1px;
+        opacity: 1;
+        transform: scale(1);
+    } 70% {
+        left: 50px;
+        opacity: 1;
+        transform: scale(0.8);
+    } 100% {
+        left: 100px;
+        opacity: 0;
+        transform: scale(0.3);
+    }
+}
+ 
+#eatingtext {
+    text-align: center;
+    min-height: 20px; 
+}
+
+.halloweenarea {
+    display: none;
+    background: #ff7518;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.halloweenarea p {
+    color: black;
+}
+
+.halloweenarea button {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.halloweenarea h2 {
+    color: green;
+}
+
+.halloweenscene {
+    position: relative;
+    height: 150px;
+    background: linear-gradient(#10102b, #342044);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.moon {
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    background: whitesmoke;
+    border-radius: 50%;
+    top: 20px;
+    right: 35px;
+    box-shadow: 0 0 25px #f5e8b8;
+}
+
+.ghost {
+    position: absolute;
+    width: 35px;
+    height: 42px;
+    background: white;
+    border-radius: 50% 50% 8px 8px;
+    animation: ghostfloat 3s ease-in-out infinite;
+}
+
+.ghost::before,
+.ghost::after {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 7px;
+    background: #222;
+    border-radius: 50%;
+    top: 15px;
+}
+
+.ghost::before {
+    left: 9px;
+}
+
+.ghost::after {
+    right: 9px;
+}
+
+.ghostone {
+    top: 55px;
+    left: 25%;
+}
+
+.ghosttwo {
+    top: 75px;
+    left: 65%;
+    animation-delay: 1s;
+    transform: scale(0.8);
+}
+
+@keyframes ghostfloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.houses {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.houses button {
+    flex: 1;
+    min-width: 80px;
+    padding: 12px;
+    background: #593c70;
+    color: white;
+    border: 2px solid #a77b75;
+    cursor: pointer;
+}
+
+.houses button:disabled {
+    background: #333;
+    border-color: #555;
+    color: #999;
+    cursor: not-allowed;
+}
+
+#halloweenmessage {
+    min-height: 24px;
+    margin-top: 15px;
+
+}
+
+body.halloweennight {
+    background: #171326;
+    color: white;
+}
+
+body.halloweennight .card,
+body.halloweennight .charactercard {
+    border-color: #674477;
+}
+
+.characterworking {
+    animation: working 0.4s infinite alternate;
+}
+
+@keyframes working {
+    from {
+        transform: translateY(0) rotate(-5deg);
+    } to {
+        transform: translateY(-8px) rotate(5deg);
+    }
+}
+
+.characterrelaxing {
+    animation: relaxing 2s ease-in-out infinite;
+}
+
+@keyframes relaxing {
+    0%, 100% {
+        transform: rotate(-5deg) translateY(0);
+    } 50% {
+        transform: rotate(5deg) translateY(-8px);
+    }
+}
+
+.charactersleeping {
+    animation: sleeping 2s ease-in-out infinite;
+}
+
+@keyframes sleeping {
+    0%, 100% {
+        transform: scale(1);
+    } 50% {
+        transform: scale(0.95);
+    }
+}
+
+#actiontext {
+    text-align: center;
+    min-height: 24px;
+    font-weight: bold;
+}
+
+.sleepsymbol {
+    position: absolute;
+    color: #7777d9;
+    font-size: 24px;
+    animation: floatup 1.5s forwards;
+}
+
+@keyframes floatup {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    } to {
+        opacity: 0;
+        transform: translateY(-45px);
+    }
+}
