@@ -8,7 +8,7 @@ Create your own character, manage daily needs, earn money, collect items, explor
 
 Open the game here:
 
-****
+**https://fah67425.github.io/life-simulator/**
 
 ## How to Play
 
